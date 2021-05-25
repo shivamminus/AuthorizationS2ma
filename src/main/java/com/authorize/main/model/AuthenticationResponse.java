@@ -1,8 +1,6 @@
 package com.authorize.main.model;
 
-//@Data
-//@NoArgsConstructor
-//@Entityo
+
 public class AuthenticationResponse {
 	private String userName;
 	private String jwtAuthToken;

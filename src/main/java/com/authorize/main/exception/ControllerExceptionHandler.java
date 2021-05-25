@@ -14,6 +14,7 @@ import com.authorize.main.dto.ErrorMessage;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
+	// This function will trigger in case of wrong credentials
 	@ExceptionHandler(value = { LoginException.class})
 	public ResponseEntity<ErrorMessage> loginExceptionHandel(Exception ex, WebRequest request) {
 		final Date date = new Date();
@@ -22,6 +23,7 @@ public class ControllerExceptionHandler {
 		return new ResponseEntity<ErrorMessage>(message, HttpStatus.UNAUTHORIZED);
 	}
 	
+	// This function will trigger when request parameters are not proper
 	@ExceptionHandler(value = { LoginCredentialNotValid.class, Exception.class })
 	public ResponseEntity<ErrorMessage> invalidLoginCredentialHandel(Exception ex, WebRequest request) {
 		final Date date = new Date();

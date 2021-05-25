@@ -19,6 +19,9 @@ public class AuthorizationService implements UserDetailsService {
 	@Autowired
 	AuthRequestRepo authRequestRepo;
 
+	// This will find the AuthenticationRequest from DB from username
+	// @params String username
+	// @return AuthenticationRequest authenticationRequestObj
 	@Override
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 		try {
@@ -33,6 +36,7 @@ public class AuthorizationService implements UserDetailsService {
 
 	}
 
+	// Test function to insert multiple records
 	public String createUser(List<AuthenticationRequest> insertUserList) {
 		for(AuthenticationRequest insertUser: insertUserList) {
 			authRequestRepo.save(insertUser);

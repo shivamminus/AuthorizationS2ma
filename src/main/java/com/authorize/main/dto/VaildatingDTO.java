@@ -5,11 +5,13 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-//@NoArgsConstructor
-//@Data
+
+// ValidatingDTO Example
+//{
+//	validStatus:false
+//}
+
 public class VaildatingDTO {
-//    @Id
-//    @JsonProperty
 	private boolean validStatus;
 
 	public boolean isValidStatus() {

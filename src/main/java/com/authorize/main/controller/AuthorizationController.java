@@ -31,6 +31,9 @@ public class AuthorizationController {
 
 	private VaildatingDTO vaildatingDTO = new VaildatingDTO();
 
+	//This Function will generate authentication token
+	// @params AuthenticationRequest, (int String String), { id, userName, password }
+	// @return ResponseEntity, (String String) { userrName, token }
 	@PostMapping("/login")
 	public ResponseEntity<Object> createAuthorizationToken(@RequestBody AuthenticationRequest authenticationRequest)
 			throws LoginException, LoginCredentialNotValid {
@@ -52,6 +55,9 @@ public class AuthorizationController {
 		}
 	}
 
+	//This Function will validate authentication token
+	// @header authorization token
+	// @return ResponseEntity, boolean  { validStatus }
 	@GetMapping(path = "/validate", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<VaildatingDTO> validatingAuthorizationToken(
 			@RequestHeader(name = "Authorization") String tokenDup) {
@@ -71,13 +77,15 @@ public class AuthorizationController {
 		}
 	}
 
+	// This will add multiple records
 	@PostMapping(path = "/insert")
 	public ResponseEntity<String> insertUser(@RequestBody List<AuthenticationRequest> insertUserList) {
 		return new ResponseEntity<String>(userDetailsService.createUser(insertUserList), HttpStatus.CREATED);
 
 	}
 
-	@GetMapping(path = "/health-check")
+	// Test Microservice connection
+	@GetMapping(path = "/check-connection")
 	public ResponseEntity<String> healthCheck() {
 		System.out.println("Authorization Microservice is Up and Running....");
 		return new ResponseEntity<>("OK", HttpStatus.OK);
