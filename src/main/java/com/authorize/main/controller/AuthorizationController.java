@@ -1,5 +1,6 @@
 package com.authorize.main.controller;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.authorize.main.dto.VaildatingDTO;
+import com.authorize.main.exception.LoginCredentialNotValid;
 import com.authorize.main.exception.LoginException;
 import com.authorize.main.model.AuthenticationRequest;
 import com.authorize.main.model.AuthenticationResponse;
 import com.authorize.main.service.AuthorizationService;
 import com.authorize.main.util.JwtUtil;
-
 
 @RestController
 public class AuthorizationController {
@@ -31,8 +32,14 @@ public class AuthorizationController {
 	private VaildatingDTO vaildatingDTO = new VaildatingDTO();
 
 	@PostMapping("/login")
-	public ResponseEntity<Object> createAuthorizationToken(@RequestBody AuthenticationRequest authenticationRequest) throws LoginException { 
-	System.out.println(authenticationRequest);
+	public ResponseEntity<Object> createAuthorizationToken(@RequestBody AuthenticationRequest authenticationRequest)
+			throws LoginException, LoginCredentialNotValid {
+		System.out.println(authenticationRequest);
+		if (authenticationRequest == null || authenticationRequest.getUserName() == null
+				|| authenticationRequest.getPassword() == null) {
+			System.out.println("ok");
+			throw new LoginCredentialNotValid("Login Details are not provided as per Requirement");
+		}
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUserName());
 		System.out.println("{} " + userDetails);
 		if (userDetails.getPassword().equals(authenticationRequest.getPassword())) {
@@ -46,7 +53,8 @@ public class AuthorizationController {
 	}
 
 	@GetMapping(path = "/validate", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<VaildatingDTO> validatingAuthorizationToken( @RequestHeader(name = "Authorization") String tokenDup) {
+	public ResponseEntity<VaildatingDTO> validatingAuthorizationToken(
+			@RequestHeader(name = "Authorization") String tokenDup) {
 		String token = tokenDup.substring(7);
 		try {
 			UserDetails user = userDetailsService.loadUserByUsername(jwtTokenUtil.extractUsername(token));
@@ -61,6 +69,12 @@ public class AuthorizationController {
 			vaildatingDTO.setValidStatus(false);
 			return new ResponseEntity<>(vaildatingDTO, HttpStatus.FORBIDDEN);
 		}
+	}
+
+	@PostMapping(path = "/insert")
+	public ResponseEntity<String> insertUser(@RequestBody List<AuthenticationRequest> insertUserList) {
+		return new ResponseEntity<String>(userDetailsService.createUser(insertUserList), HttpStatus.CREATED);
+
 	}
 
 	@GetMapping(path = "/health-check")

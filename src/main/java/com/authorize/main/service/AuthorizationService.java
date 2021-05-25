@@ -1,6 +1,7 @@
 package com.authorize.main.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -29,6 +30,14 @@ public class AuthorizationService implements UserDetailsService {
 			// TODO: handle exception
 			return null;
 		}
+
+	}
+
+	public String createUser(List<AuthenticationRequest> insertUserList) {
+		for(AuthenticationRequest insertUser: insertUserList) {
+			authRequestRepo.save(insertUser);
+		}
+		return "Succesfully Recorded";
 
 	}
 
