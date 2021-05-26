@@ -27,13 +27,13 @@ public class AuthorizationService implements UserDetailsService {
 	 * @return AuthenticationRequest authenticationRequestObj
 	 */
 	@Override
-	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		try {
-			AuthenticationRequest authenticationRequest = authRequestRepo.findByUserName(s);
+			AuthenticationRequest authenticationRequest = authRequestRepo.findByUserName(userName);
 			UserDetails user = new User(authenticationRequest.getUserName(), authenticationRequest.getPassword(),
 					new ArrayList<>());
 			return user;
-		} catch (Exception e) {
+		} catch (Exception noValidUserFound) {
 			// TODO: handle exception
 			return null;
 		}

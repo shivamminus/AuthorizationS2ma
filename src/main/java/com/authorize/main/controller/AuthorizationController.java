@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.authorize.main.dto.VaildatingDTO;
@@ -22,6 +23,8 @@ import com.authorize.main.service.AuthorizationService;
 import com.authorize.main.util.JwtUtil;
 
 @RestController
+@RequestMapping(value="/auth")
+
 public class AuthorizationController {
 
 	@Autowired
@@ -96,7 +99,7 @@ public class AuthorizationController {
 	}
 
 	/*
-	 *  Test Microservice Health 
+	 *  Test Microservice Connection 
 	 */
 	@GetMapping(path = "/check-connection")
 	public ResponseEntity<String> healthCheck() {
