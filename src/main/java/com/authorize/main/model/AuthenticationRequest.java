@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
+/*
+ * DB Class to store User Credentials
+*/
+
 @Entity
 public class AuthenticationRequest {
 

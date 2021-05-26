@@ -2,13 +2,19 @@ package com.authorize.main.dto;
 
 import java.util.Date;
 
-// Error model Example
-//{
-//  statusCode:500,
-//  timestamp: "Tue May 25 17:37:21 UTC 2021",
-//  message: "Something went wrong"
-//}
-public class ErrorMessage {
+/*
+		 Error model Example
+		JSON:
+		{
+		  statusCode:500,
+		  timestamp: "Tue May 25 17:37:21 UTC 2021",
+		  message: "Something went wrong"
+		}
+
+*/
+
+public class ErrorMessage 
+{
 	private int statusCode;
 	private Date timestamp;
 	private String message;

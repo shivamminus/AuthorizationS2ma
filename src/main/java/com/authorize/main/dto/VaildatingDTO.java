@@ -1,17 +1,13 @@
 package com.authorize.main.dto;
 
-import javax.persistence.Id;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-
-
-// ValidatingDTO Example
-//{
-//	validStatus:false
-//}
-
+/* ValidatingDTO Example
+JSON:
+	{
+		validStatus:false
+	}
+*/
 public class VaildatingDTO {
+
 	private boolean validStatus;
 
 	public boolean isValidStatus() {

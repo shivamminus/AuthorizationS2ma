@@ -1,6 +1,9 @@
 package com.authorize.main.model;
 
 
+/*
+ * Response Class to return JWT Token
+*/
 public class AuthenticationResponse {
 	private String userName;
 	private String jwtAuthToken;

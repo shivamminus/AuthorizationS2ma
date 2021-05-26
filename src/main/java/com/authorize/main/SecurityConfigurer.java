@@ -8,7 +8,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 class SecurityConfigurer extends WebSecurityConfigurerAdapter {
-
+	
+	
+	/*
+	 * Method to Permit Valid User to Interact with the microservices
+	 * for GET, POST requests
+	*/	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable()
