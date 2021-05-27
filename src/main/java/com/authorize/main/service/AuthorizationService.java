@@ -30,8 +30,10 @@ public class AuthorizationService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		try {
 			AuthenticationRequest authenticationRequest = authRequestRepo.findByUserName(userName);
+
 			UserDetails user = new User(authenticationRequest.getUserName(), authenticationRequest.getPassword(),
 					new ArrayList<>());
+
 			return user;
 		} catch (Exception noValidUserFound) {
 			// TODO: handle exception
@@ -41,12 +43,14 @@ public class AuthorizationService implements UserDetailsService {
 	}
 
 	/*
-	 *  Test function to insert multiple records
-	 */	
+	 * Test function to insert multiple records
+	 */
 	public String createUser(List<AuthenticationRequest> insertUserList) {
+
 		for (AuthenticationRequest insertUser : insertUserList) {
 			authRequestRepo.save(insertUser);
 		}
+
 		return "Succesfully Recorded";
 
 	}

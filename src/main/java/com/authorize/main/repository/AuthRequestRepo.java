@@ -7,7 +7,7 @@ import com.authorize.main.model.AuthenticationRequest;
 
 
 /*
- * 
+ * JPA extending interface for DB related methods
 */
 @Repository
 public interface AuthRequestRepo extends JpaRepository<AuthenticationRequest, String> {

@@ -11,7 +11,7 @@ class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 	
 	
 	/*
-	 * Method to Permit Valid User to Interact with the microservices
+	 * Method to Permit Valid User to Interact with the Microservices
 	 * for GET, POST requests
 	*/	
 	@Override
