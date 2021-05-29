@@ -48,8 +48,11 @@ public class AuthorizationController {
 
 		if (authenticationRequest == null || authenticationRequest.getUserName() == null
 				|| authenticationRequest.getPassword() == null) {
-			System.out.println("ok");
-			throw new LoginCredentialNotValid("Login Details are not provided as per Requirement");
+			return new ResponseEntity<>("Login Details are not provided as per Requirement", HttpStatus.BAD_REQUEST);
+			/*
+			 * throw new
+			 * LoginCredentialNotValid("Login Details are not provided as per Requirement");
+			 */
 		}
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUserName());
@@ -62,7 +65,8 @@ public class AuthorizationController {
 					jwtTokenUtil.generateToken(userDetails)), HttpStatus.OK);
 		} else {
 			System.out.println("END - [login(customerLoginCredentials)]");
-			throw new LoginException("Invalid Username or Password");
+			return new ResponseEntity<>("Invalid Username or Password", HttpStatus.FORBIDDEN);
+			/* throw new LoginException("Invalid Username or Password"); */
 		}
 	}
 
