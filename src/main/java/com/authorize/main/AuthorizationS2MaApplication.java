@@ -8,7 +8,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class AuthorizationS2MaApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {        
+		//Increase Timeout of Server so it will not give  504 error
+		System.setProperty("server.connection-timeout","60000");
 		SpringApplication.run(AuthorizationS2MaApplication.class, args);
 	}
 
